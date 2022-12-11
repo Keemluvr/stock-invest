@@ -19,6 +19,18 @@
     "@typescript-eslint/no-explicit-any": "error",
 
     // Why would you want unused vars?
-    "@typescript-eslint/no-unused-vars": "error"
+    "@typescript-eslint/no-unused-vars": "error",
+
+    "@typescript-eslint/explicit-function-return-type": "off",
+
+    "react/react-in-jsx-scope": "off",
+
+    "@typescript-eslint/no-invalid-void-type": "off",
+
+    "@typescript-eslint/strict-boolean-expressions": "off",
+
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
+
+    "@typescript-eslint/prefer-optional-chain": "off"
   }
 }
