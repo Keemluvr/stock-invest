@@ -1,10 +1,11 @@
 import React, { FC, InputHTMLAttributes } from 'react'
-import { Input } from './Styles'
+import * as Styled from './Styles'
 
-interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {}
+export interface InputFieldProps
+  extends InputHTMLAttributes<HTMLInputElement> {}
 
 const InputField: FC<InputFieldProps> = (props: InputFieldProps) => {
-  return <Input {...props} />
+  return <Styled.InputField {...props} />
 }
 
 export default InputField

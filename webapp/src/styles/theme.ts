@@ -3,10 +3,20 @@ const theme = {
     primary: '#1D1CE5',
     secondary: '#0E0E72',
     background: '#F8F8F8',
-    border: '#CACACA',
+    border: {
+      normal: '#E7E7E7',
+      selected: '#C4C4FA',
+      background: '#EBEBFF'
+    },
     text: {
       normal: '#181717',
-      withBackground: '#FFFFFF'
+      withBackground: '#FFFFFF',
+      link: '#1D1CE5',
+      selected: '#302FE7'
+    },
+    button: {
+      background: '#302FE7',
+      backgroundHover: '#1D1CE5'
     }
   },
   font: {
@@ -27,10 +37,26 @@ const theme = {
       extraHuge: '107px'
     }
   },
+  breakpoints: {
+    mobileS: '320px',
+    mobileM: '375px',
+    mobileL: '470px',
+    tablet: '768px',
+    laptop: '1024px',
+    laptopL: '1440px',
+    desktop: '2560px'
+  },
+  device: {
+    mobileS: '(max-width: 320px)',
+    mobileM: '(max-width: 375px)',
+    mobileL: '(max-width: 470px)',
+    tablet: '(max-width: 768px)',
+    laptop: '(max-width: 1024px)',
+    laptopL: '(max-width: 1440px)',
+    desktop: '(max-width: 2560px)'
+  },
   preDefined: {
-    cardBoxShadow: '0 8px 16px 0 rgba(152, 152, 152, 0.2)',
-    cardBoxShadowHover: '0 14px 30px 0 rgba(152, 152, 152, 0.3)',
-    modalBoxShadow: '0 10px 15px 0px rgb(152 152 152 / 4%)'
+    cardBoxShadow: ' 5px 5px 20px rgba(0 0 0/0.15)'
   }
 }
 

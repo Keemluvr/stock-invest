@@ -16,7 +16,7 @@
     "react/prop-types": "off",
 
     // doesn't accept the any type
-    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
 
     // Why would you want unused vars?
     "@typescript-eslint/no-unused-vars": "error",
@@ -31,6 +31,10 @@
 
     "@typescript-eslint/no-unnecessary-type-assertion": "off",
 
-    "@typescript-eslint/prefer-optional-chain": "off"
+    "@typescript-eslint/prefer-optional-chain": "off",
+
+    "no-tabs": "off",
+
+    "multiline-ternary": "off"
   }
 }
