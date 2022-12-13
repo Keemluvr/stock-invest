@@ -3,3 +3,8 @@ export type Stock = {
   lastPrice: number
   pricedAt: string
 }
+
+export type StockHistory = {
+  name: string
+  prices: Stock[]
+}

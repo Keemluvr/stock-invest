@@ -1,5 +1,6 @@
 import Routes from './routes'
 import 'react-toastify/dist/ReactToastify.css'
+import '@ant-design/flowchart/dist/index.css'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ToastContainer } from 'react-toastify'
 import { ThemeProvider } from 'styled-components'

@@ -1,37 +1,37 @@
 import { useState } from 'react'
-import { useQuery } from 'react-query'
-import useDebounce from '@/hooks/useDebounce'
-import { fetchStockByName } from '@/services/stock'
+import { Stock, StockConfig } from '@ant-design/plots'
 import { Card, InputField } from '@/components'
+import { subtractDays } from '@/helpers'
+import useDebounce from '@/hooks/useDebounce'
 import * as Styled from './style'
-import { ICardDefault } from '@/components/card/View'
+import { getStock, getStockHistory } from './service'
+import { SUGGESTIONS } from '@/constants'
 
 const Home = () => {
+  const today = new Date()
   const [stock, setStock] = useState<string>('')
+  const [to] = useState<Date>(today)
+  const [from] = useState<Date>(subtractDays(to, 15))
   const debouncedStock = useDebounce<string>(stock, 1500)
-  const suggestions: string[] = ['AGAC', 'LEAD', 'LNN', 'MELI', 'NETZ']
 
-  const { data, isLoading } = useQuery({
-    queryKey: [debouncedStock],
-    queryFn: async () => await fetchStockByName(debouncedStock),
-    select: (data) => {
-      const stock = data?.data
-      return {
-        title: stock.name,
-        items: [
-          { name: 'Last Price', value: stock.lastPrice },
-          { name: 'Priced At', value: stock.pricedAt }
-        ]
-      }
-    },
-    enabled: !!debouncedStock || debouncedStock !== ''
-  })
+  const { data, isLoading } = getStock(debouncedStock)
+
+  const { data: history, isLoading: isLoadingHistory } = getStockHistory(
+    debouncedStock,
+    from,
+    to
+  )
 
   const searchStock = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setStock(evt.target.value)
   }
 
-  const onClickStock = (item: ICardDefault | undefined) => {}
+  const stockPlotConfig: StockConfig = {
+    data: history,
+    xField: 'pricedAt',
+    yField: ['opening', 'closing', 'high', 'low'],
+    loading: isLoadingHistory
+  }
 
   return (
     <Styled.HomeWrapper>
@@ -39,7 +39,7 @@ const Home = () => {
         <InputField value={stock} onChange={searchStock} />
         <Styled.SearchSuggestions stockField={stock}>
           Suggestions:
-          {suggestions.map((name) => (
+          {SUGGESTIONS.map((name) => (
             <Styled.Suggestion key={name} onClick={() => setStock(name)}>
               {name}
             </Styled.Suggestion>
@@ -48,9 +48,12 @@ const Home = () => {
       </Styled.SearchWrapper>
 
       <Styled.ContentWrapper>
-        {isLoading && <div>Loading ...</div>}
-        {!isLoading && data && debouncedStock && (
-          <Card default={data} onHandle={onClickStock} />
+        {(isLoading || isLoadingHistory) && <div>Loading ...</div>}
+        {data && history && debouncedStock && (
+          <>
+            <Card default={data} />
+            <Stock key={history} {...stockPlotConfig} />
+          </>
         )}
       </Styled.ContentWrapper>
     </Styled.HomeWrapper>
