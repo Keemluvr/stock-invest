@@ -1,27 +1,31 @@
 const theme = {
   color: {
-    primary: '#1D1CE5',
+    primary: '#26A69A',
     secondary: '#0E0E72',
     background: '#F8F8F8',
     border: {
       normal: '#E7E7E7',
-      selected: '#C4C4FA',
-      background: '#EBEBFF'
+      selected: '#C3FFFF',
+      background: '#E0FFFF'
     },
     text: {
       normal: '#181717',
       withBackground: '#FFFFFF',
-      link: '#1D1CE5',
-      selected: '#302FE7'
+      link: '#26A69A',
+      selected: '#26A69A'
     },
     button: {
       background: '#302FE7',
       backgroundHover: '#1D1CE5'
+    },
+    scrollbar: {
+      background: '#FFFFFF',
+      color: '#81888D'
     }
   },
   font: {
     family: {
-      rubik: "'Rubik', sans-serif"
+      rubik: '"Gill Sans", sans-serif'
     },
     size: {
       extraTiny: '12px',

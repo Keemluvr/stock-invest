@@ -1,7 +1,7 @@
-// import { notificationConfig } from '@/hooks'
+import { notificationConfig } from '@/hooks'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 
-// import { toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_API
@@ -9,8 +9,8 @@ const instance = axios.create({
 
 const defaultErrorHandler = (error: AxiosError<{ message: string }>): void => {
   if (error.response) {
-    //   const { message } = error.response.data
-    //   toast.error(message, notificationConfig)
+    const { message } = error.response.data
+    toast.error(message, notificationConfig)
   }
 }
 
@@ -21,6 +21,11 @@ interface IHttp<T> {
   ) => Promise<AxiosResponse<T> | void>
 }
 
+export const parameterizeArray = (key: string, array: string[]) => {
+  array = array.map(encodeURIComponent)
+  return '?' + key + '[]=' + array.join('&' + key + '[]=')
+}
+
 export const http = <T>(): IHttp<T> => {
   return {
     get: async (
@@ -28,7 +33,7 @@ export const http = <T>(): IHttp<T> => {
       params?: Record<string, string | Date>
     ): Promise<void | AxiosResponse<T>> =>
       await instance
-        .get(url, params)
+        .get(url, { timeout: 5000, ...params })
         .then((res) => res)
         .catch(defaultErrorHandler)
   }

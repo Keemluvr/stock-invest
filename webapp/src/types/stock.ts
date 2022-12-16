@@ -4,7 +4,16 @@ export type Stock = {
   pricedAt: string
 }
 
+export type StockDetails = {
+  closing: number
+  high: number
+  low: number
+  opening: number
+  pricedAt: Date
+  volume: number | null
+}
+
 export type StockHistory = {
   name: string
-  prices: Stock[]
+  prices: StockDetails[]
 }

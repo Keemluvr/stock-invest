@@ -69,3 +69,58 @@ export const ContentWrapper = styled.div`
     margin: 20px 12%;
   }
 `
+
+export const StockHistory = styled.div`
+  display: flex;
+  height: 100%;
+  margin-top: 20px;
+
+  [data-chart-source-type='G2Plot'] {
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+  }
+
+  @media ${({ theme }) => theme.device.laptop} {
+    flex-direction: column;
+    flex-direction: column-reverse;
+
+    [data-chart-source-type='G2Plot'] {
+      max-height: 250px;
+    }
+  }
+`
+
+export const StockList = styled.div`
+  min-width: 250px;
+  margin-right: 30px;
+  max-height: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 5px 15px;
+
+  .card + .card {
+    margin-top: 10px;
+  }
+
+  @media ${({ theme }) => theme.device.laptop} {
+    margin-right: 0;
+    margin-top: 20px;
+  }
+`
+
+export const StockHistoryWrapper = styled.div`
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+
+  .ant-picker-range {
+    margin: 0 auto;
+  }
+`
+
+export const StockTitle = styled.h2`
+  text-align: center;
+  font-size: ${({ theme }) => theme.font.size.tinyLarge};
+  margin: 40px 0;
+`

@@ -1,5 +1,5 @@
-import { http } from '@/helpers'
-import { Stock, StockHistory } from '@/types/stock'
+import { http, parameterizeArray } from '@/helpers'
+import { Stock, StockDetails } from '@/types/stock'
 
 export const fetchStockByName = async (stockName: string) =>
   await http<Stock>()
@@ -12,7 +12,18 @@ export const fetchHistoryStockByName = async (
   from: Date,
   to: Date
 ) =>
-  await http<StockHistory>()
+  await http<StockDetails>()
     .get(`/stocks/${stockName}/history?from=${from}&to=${to}`)
     .then((result) => result)
     .catch((error) => error)
+
+export const fetchCompareByName = async (
+  stockName: string,
+  stocksToCompare: string[]
+) => {
+  const query = parameterizeArray('stocksToCompare', stocksToCompare)
+  return await http<StockDetails>()
+    .get(`/stocks/${stockName}/compare${query}`)
+    .then((result) => result)
+    .catch((error) => error)
+}

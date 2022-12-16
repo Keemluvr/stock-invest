@@ -6,15 +6,16 @@ export const Card = styled.div<CardProps>`
   justify-content: center;
   flex-direction: column;
   position: relative;
-  width: 21rem;
-  height: 10rem;
-  margin: 2rem auto;
-  padding: 2em;
+  width: ${(props) => (props.default ? '31rem' : 'auto')};
+  height: ${(props) => (props.default ? '10rem' : 'auto')};
+  margin: 0 auto;
+  padding: 1em 2em;
   border-radius: 0.75em;
   box-shadow: ${({ theme }) => theme.preDefined.cardBoxShadow};
   text-align: left;
   transition: transform 200ms ease-in;
-  border-top: 5px solid ${({ theme }) => theme.color.primary};
+  ${({ theme, withBorder }) =>
+    withBorder && ` border-top: 5px solid ${theme.color.primary}`};
 
   :hover {
     transform: scale(1.03);

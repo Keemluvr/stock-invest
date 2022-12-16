@@ -1,5 +1,4 @@
-export const subtractDays = (date: Date, days: number): Date => {
-  const result = new Date(date)
-  result.setDate(date.getDate() - days)
-  return result
-}
+import { DATE_FORMAT } from '@/constants'
+import dayjs from 'dayjs'
+
+export const formatDate = (date: string) => dayjs(date).format(DATE_FORMAT)

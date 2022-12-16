@@ -61,7 +61,7 @@ const GlobalStyle = createGlobalStyle<{ theme: ITheme }>`
 	}
 
 	::-webkit-scrollbar {
-		width: 10px;
+		width: 8px;
 		padding: 5px;
 		cursor: move;
 	}
@@ -71,8 +71,8 @@ const GlobalStyle = createGlobalStyle<{ theme: ITheme }>`
 	}
 	
 	::-webkit-scrollbar-thumb {
-		background:  ${({ theme }) => theme.color.primary};
-		border: 2px solid ${({ theme }) => theme.color.primary};
+		background:  ${({ theme }) => theme.color.scrollbar.color};
+		border: 2px solid ${({ theme }) => theme.color.scrollbar.color};
 		border-radius: 15px;
 	}
 `
