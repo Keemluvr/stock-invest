@@ -15,7 +15,7 @@ const Home = () => {
   const { mutate, data, isLoading } = getStock()
 
   useEffect(() => {
-    mutate({ stockName: debouncedStock })
+    if (stock && stock !== '') mutate({ stockName: debouncedStock })
   }, [debouncedStock])
 
   const searchStock = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,8 +47,8 @@ const Home = () => {
                 <Styled.StockTitle>Current Price</Styled.StockTitle>
                 <Card default={data as ICardDefault} withBorder />
 
-                <HistoricalPrice stockName={debouncedStock} />
-                <CompareTo stockName={debouncedStock} />
+                <HistoricalPrice stockName={stock} />
+                <CompareTo stockName={stock} />
               </Styled.Content>
             )}
           </>
