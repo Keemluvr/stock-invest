@@ -21,6 +21,10 @@ const theme = {
     scrollbar: {
       background: '#FFFFFF',
       color: '#81888D'
+    },
+    stockCompare: {
+      arrowDown: '#ff4d4f',
+      arrowUp: '#52c41a'
     }
   },
   font: {

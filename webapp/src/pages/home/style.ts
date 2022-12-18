@@ -69,6 +69,7 @@ export const ContentWrapper = styled.div`
     margin: 20px 12%;
   }
 `
+export const Content = styled.div``
 
 export const StockHistory = styled.div`
   display: flex;
@@ -109,7 +110,7 @@ export const StockList = styled.div`
   }
 `
 
-export const StockHistoryWrapper = styled.div`
+export const StockSectionWrapper = styled.div`
   margin: 30px 0;
   display: flex;
   flex-direction: column;
@@ -117,10 +118,37 @@ export const StockHistoryWrapper = styled.div`
   .ant-picker-range {
     margin: 0 auto;
   }
+
+  .ant-select-multiple {
+    min-width: 400px;
+    margin: 0 auto 30px auto;
+  }
 `
 
 export const StockTitle = styled.h2`
   text-align: center;
   font-size: ${({ theme }) => theme.font.size.tinyLarge};
   margin: 40px 0;
+`
+
+export const ListCompare = styled.div`
+  margin: 20px 0;
+
+  .card {
+    margin-bottom: 10px;
+  }
+
+  p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+`
+
+export const ComparePriceUp = styled.div`
+  color: ${({ theme }) => theme.color.stockCompare.arrowUp};
+`
+
+export const ComparePriceDown = styled.div`
+  color: ${({ theme }) => theme.color.stockCompare.arrowDown};
 `

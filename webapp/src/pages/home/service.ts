@@ -3,45 +3,54 @@ import {
   fetchHistoryStockByName,
   fetchStockByName
 } from '@/services/stock'
-import { useQuery } from 'react-query'
-import { Stock } from '@/types/stock'
-import { formatDate } from '@/helpers'
+import { useMutation } from 'react-query'
+import {
+  formatHistoryStockResponse,
+  formatStockResponse
+} from './helpers/format'
 
-export const getStock = (stockName: string) =>
-  useQuery({
-    queryKey: ['stock', stockName],
-    queryFn: async () => await fetchStockByName(stockName),
-    select: (data) => {
-      const stock = data?.data
-      return {
-        title: stock.name,
-        items: [
-          { name: 'Last Price', value: stock.lastPrice },
-          { name: 'Priced At', value: formatDate(stock.pricedAt) }
-        ]
-      }
-    },
-    enabled: !!stockName || stockName !== ''
+interface IGetStockMutateParams {
+  stockName: string
+}
+
+/**
+ * Fetch the latest quote for the specified stock.
+ */
+export const getStock = () => {
+  const { data, ...props } = useMutation(
+    async ({ stockName }: IGetStockMutateParams) =>
+      await fetchStockByName(stockName)
+  )
+  return { data: formatStockResponse(data), ...props }
+}
+
+interface IGetStockHistoryMutateParams {
+  stockName: string
+  from: Date
+  to: Date
+}
+
+/**
+ * Fetch all the changes of the specified action in the sent period.
+ */
+export const getStockHistory = () => {
+  const { data, ...props } = useMutation({
+    mutationFn: async (params: IGetStockHistoryMutateParams) =>
+      await fetchHistoryStockByName(params.stockName, params.from, params.to)
   })
+  return { data: formatHistoryStockResponse(data), ...props }
+}
 
-export const getStockHistory = (stockName: string, from: Date, to: Date) =>
-  useQuery({
-    queryKey: ['history', from, to, stockName],
-    queryFn: async () => await fetchHistoryStockByName(stockName, from, to),
-    select: (data) => {
-      const prices = data?.data.prices
-      const name = data?.data.name
-      return prices?.map((price: Stock) => ({ ...price, name })) || []
-    },
-    enabled: !!stockName || stockName !== ''
-  })
+interface IGetCompareToMutateParams {
+  stockName: string
+  stocksToCompare: string[]
+}
 
-export const getCompareTo = (stockName: string, stocksToCompare: string[]) =>
-  useQuery({
-    queryKey: [stockName, stocksToCompare.length],
-    queryFn: async () => await fetchCompareByName(stockName, stocksToCompare),
-    select: (data) => {
-      return data?.data?.lastPrices
-    },
-    enabled: false
+/**
+ * Bring the last change of the main action and all the actions sent for comparison.
+ */
+export const getCompareTo = () =>
+  useMutation({
+    mutationFn: async (params: IGetCompareToMutateParams) =>
+      await fetchCompareByName(params.stockName, params.stocksToCompare)
   })

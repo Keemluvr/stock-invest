@@ -4,7 +4,8 @@ import axios, { AxiosError, AxiosResponse } from 'axios'
 import { toast } from 'react-toastify'
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_API
+  baseURL: process.env.REACT_APP_SERVER_API,
+  timeout: 20000
 })
 
 const defaultErrorHandler = (error: AxiosError<{ message: string }>): void => {

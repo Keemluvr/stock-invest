@@ -24,23 +24,29 @@ const Card: FC<CardProps> = (props: CardProps) => {
       className="card"
       withBorder={props.withBorder}
     >
-      {!props.default && props.children}
-
-      {props.default && !props.default.items && !props.default.title ? (
-        <Empty />
+      {!props.default ? (
+        props.children
       ) : (
         <>
-          <Styled.CardTitle>{props.default?.title}</Styled.CardTitle>
-          {props.default?.items?.map(({ name, value }) => (
-            <Styled.CardItem key={name}>
-              <Styled.CardItemTitle>{name}</Styled.CardItemTitle>
-              <Styled.CardItemDescription>{value}</Styled.CardItemDescription>
-            </Styled.CardItem>
-          ))}
-          {props.onHandle && (
-            <Button onClick={() => props?.onHandle?.(props.default)}>
-              More details
-            </Button>
+          {props.default && !props.default.items && !props.default.title ? (
+            <Empty />
+          ) : (
+            <>
+              <Styled.CardTitle>{props.default?.title}</Styled.CardTitle>
+              {props.default?.items?.map(({ name, value }) => (
+                <Styled.CardItem key={name}>
+                  <Styled.CardItemTitle>{name}</Styled.CardItemTitle>
+                  <Styled.CardItemDescription>
+                    {value}
+                  </Styled.CardItemDescription>
+                </Styled.CardItem>
+              ))}
+              {props.onHandle && (
+                <Button onClick={() => props?.onHandle?.(props.default)}>
+                  More details
+                </Button>
+              )}
+            </>
           )}
         </>
       )}

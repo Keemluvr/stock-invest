@@ -1,10 +1,10 @@
 import { http, parameterizeArray } from '@/helpers'
-import { Stock, StockDetails } from '@/types/stock'
+import { Stock, StockCompare, StockDetails } from '@/types/stock'
 
 export const fetchStockByName = async (stockName: string) =>
   await http<Stock>()
     .get(`/stock/${stockName}/quote`)
-    .then((result) => result)
+    .then((result) => result?.data)
     .catch((error) => error)
 
 export const fetchHistoryStockByName = async (
@@ -14,7 +14,7 @@ export const fetchHistoryStockByName = async (
 ) =>
   await http<StockDetails>()
     .get(`/stocks/${stockName}/history?from=${from}&to=${to}`)
-    .then((result) => result)
+    .then((result) => result?.data)
     .catch((error) => error)
 
 export const fetchCompareByName = async (
@@ -22,8 +22,8 @@ export const fetchCompareByName = async (
   stocksToCompare: string[]
 ) => {
   const query = parameterizeArray('stocksToCompare', stocksToCompare)
-  return await http<StockDetails>()
+  return await http<StockCompare>()
     .get(`/stocks/${stockName}/compare${query}`)
-    .then((result) => result)
+    .then((result) => result?.data?.lastPrices)
     .catch((error) => error)
 }
