@@ -29,11 +29,14 @@ const Home = () => {
         <InputField value={stock} onChange={searchStock} />
         <Styled.SearchSuggestions stockField={stock}>
           Suggestions:
-          {SUGGESTIONS.map((name) => (
-            <Styled.Suggestion key={name} onClick={() => setStock(name)}>
-              {name}
-            </Styled.Suggestion>
-          ))}
+          {SUGGESTIONS.map(
+            (name) =>
+              name !== stock && (
+                <Styled.Suggestion key={name} onClick={() => setStock(name)}>
+                  {name}
+                </Styled.Suggestion>
+              )
+          )}
         </Styled.SearchSuggestions>
       </Styled.SearchWrapper>
 
