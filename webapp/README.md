@@ -37,7 +37,7 @@ https://user-images.githubusercontent.com/31359251/208454337-3cff504f-2d86-49c3-
 # How to run tests
 
 1. Install packages `npm install`
-2. Start development server `npm run cypress`
+2. Start test server `npm run cypress`
 
 # Available Scripts
 
