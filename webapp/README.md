@@ -3,16 +3,31 @@
 </h1>
 <p align="center">🚀 Application for view stocks</p>
 
-# About
+https://user-images.githubusercontent.com/31359251/208454337-3cff504f-2d86-49c3-baf7-0a0bd80be6a9.mp4
 
-Application for view stocks
+# Table of Contents
+<!--ts-->
+   * [Functionalities](#functionalities)
+   * [Technologies](#technologies)
+   * [How to run the application locally](#how-to-run-the-application-locally)
+   * [How to run tests](#how-to-run-tests)
+   * [Available Scripts](#available-scripts)
+   * [Screenshot](#screenshot)
+<!--te-->
 
-## Functionalities
+
+# Functionalities
 
 - [x] Current price;
 - [x] Historical price;
 - [x] Current price compared to other stocks;
 - [x] Projection of earnings with purchase on a specific date.
+
+# Technologies
+
+**Development**: React.js, Axios and Ant Design
+
+**Test**: Cypress
 
 # How to run the application locally
 
@@ -73,3 +88,8 @@ ESLint settings file is found in the root of the webapp with the name **.eslintr
 Use a tool called Prettier that will format the code, thus ensuring a consistent style in the code.
 
 Prettier settings file is found in the root of the webapp with the name **.prettierrc**
+
+# Screenshot
+
+![Stock Invest - Home Page](https://user-images.githubusercontent.com/31359251/208454570-788fe63b-a60e-48d6-86fa-0a846e94b7b7.png)
+
