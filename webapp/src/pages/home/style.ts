@@ -66,6 +66,11 @@ export const ContentWrapper = styled.div`
   margin: 40px 200px;
   padding-bottom: 50px;
 
+  .ant-spin {
+    display: block;
+    margin: 0 auto;
+  }
+
   @media ${({ theme }) => theme.device.tablet} {
     margin: 20px 12%;
   }

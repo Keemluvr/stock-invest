@@ -32,7 +32,9 @@ const EarningForecasts = () => {
 
   return (
     <Styled.StockSectionWrapper>
-      <Styled.StockTitle>Earning Forecasts</Styled.StockTitle>
+      <Styled.StockTitle data-test-id="earning-forecasts-title">
+        Earning Forecasts
+      </Styled.StockTitle>
 
       <Form form={form} onFinish={onFinish} layout="inline">
         <Form.Item

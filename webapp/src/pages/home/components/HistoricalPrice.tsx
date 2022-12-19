@@ -50,7 +50,9 @@ const HistoricalPrice = () => {
 
   return (
     <Styled.StockSectionWrapper>
-      <Styled.StockTitle>Historical Price</Styled.StockTitle>
+      <Styled.StockTitle data-test-id="historical-price-title">
+        Historical Price
+      </Styled.StockTitle>
 
       {isLoading ? (
         <Spin />

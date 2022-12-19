@@ -38,14 +38,19 @@ const Home = () => {
   return (
     <Styled.HomeWrapper>
       <Styled.SearchWrapper stockField={stock}>
-        <InputField value={stock} onChange={searchStock} />
+        <InputField
+          value={stock}
+          onChange={searchStock}
+          data-test-id="search-stock"
+        />
         <Styled.SearchSuggestions stockField={stock}>
-          Suggestions:
+          <span data-test-id="suggestions">Suggestions:</span>
           {SUGGESTIONS.map(
-            (name) =>
+            (name, index) =>
               name !== stock && (
                 <Styled.Suggestion
                   key={name}
+                  data-test-id={`suggestion-item-${index}`}
                   onClick={() => onClickSuggestion(name)}
                 >
                   {name}
@@ -62,7 +67,9 @@ const Home = () => {
           <>
             {debouncedStock && (
               <Styled.Content>
-                <Styled.StockTitle>Current Price</Styled.StockTitle>
+                <Styled.StockTitle data-test-id="current-price-title">
+                  Current Price
+                </Styled.StockTitle>
                 <Card default={data as ICardDefault} withBorder />
 
                 <HistoricalPrice />

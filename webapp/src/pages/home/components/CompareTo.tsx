@@ -63,7 +63,9 @@ const CompareTo = () => {
 
   return (
     <Styled.StockSectionWrapper>
-      <Styled.StockTitle>Compare to</Styled.StockTitle>
+      <Styled.StockTitle data-test-id="compare-to-title">
+        Compare to
+      </Styled.StockTitle>
 
       <Select
         mode="tags"
