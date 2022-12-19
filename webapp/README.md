@@ -1,23 +1,35 @@
-# Getting Started with Create React App
+<h1 align="center">
+    <a href="https://github.com/Keemluvr/alive">🔗 Stock Invest</a>
+</h1>
+<p align="center">🚀 Application for view stocks</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# About
 
-## Available Scripts
+Application for view stocks
+
+## Functionalities
+
+- [x] Current price;
+- [x] Historical price;
+- [x] Current price compared to other stocks;
+- [x] Projection of earnings with purchase on a specific date.
+
+# How to run the application locally
+
+1. Install packages `npm install`
+2. Start development server `npm run start`
+
+# Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -39,8 +51,20 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### `npm run prepare`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Command needed to configure [Husky](https://typicode.github.io/husky/#/), it runs automatically after installing all dependencies
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Note: Yarn 2+ doesn't support prepare lifecycle script, so husky needs to be installed differently (this doesn't apply to Yarn 1 though). See [Yarn 2+ install](https://typicode.github.io/husky/#/?id=yarn-2).**
+
+### `npm run lint`
+
+This command will use a tool called ESLint, where it will identify and report patterns found in ECMAScript/JavaScript code, in order to make the code more consistent and avoid bugs.
+
+ESLint settings file is found in the root of the webapp with the name **.eslintrc**
+
+### `npm run format`
+
+Use a tool called Prettier that will format the code, thus ensuring a consistent style in the code.
+
+Prettier settings file is found in the root of the webapp with the name **.prettierrc**
