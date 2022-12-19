@@ -14,7 +14,10 @@ const EarningForecasts = () => {
   const today = dayjs()
   const { mutate, data = [], isLoading, isError } = getEarningForecasts()
 
-  const onFinish = (allValues: any) => {
+  const onFinish = (allValues: {
+    purchasedAmount: number
+    purchasedAt: Dayjs
+  }) => {
     mutate({
       stockName,
       purchasedAmount: allValues.purchasedAmount,
