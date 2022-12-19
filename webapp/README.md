@@ -5,7 +5,7 @@
 
 https://user-images.githubusercontent.com/31359251/208454337-3cff504f-2d86-49c3-baf7-0a0bd80be6a9.mp4
 
-# Table of Contents
+# Summary
 <!--ts-->
    * [Functionalities](#functionalities)
    * [Technologies](#technologies)
