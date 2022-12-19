@@ -19,6 +19,11 @@ Application for view stocks
 1. Install packages `npm install`
 2. Start development server `npm run start`
 
+# How to run tests
+
+1. Install packages `npm install`
+2. Start development server `npm run cypress`
+
 # Available Scripts
 
 In the project directory, you can run:
