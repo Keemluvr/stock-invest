@@ -1,37 +1,42 @@
-import { FC } from 'react'
 import { Card } from '@/components'
 import { getCompareTo } from '../service'
 import { SELECT_SUGGESTIONS } from '@/constants'
 import { Stock as IStock } from '@/types/stock'
-import { Empty, Select, Spin } from 'antd'
-import { formatDate } from '@/helpers'
+import { Select, Spin } from 'antd'
+import { formatDate, formatToUSD } from '@/helpers'
 import * as Styled from '../style'
 import {
   ArrowDownOutlined,
   ArrowUpOutlined,
   SwapOutlined
 } from '@ant-design/icons'
-import { isEmpty } from 'lodash'
+import { useStockState } from '@/contexts/stocks'
 
 export interface ICompareToProps {
   stockName: string
 }
 
-const CompareTo: FC<ICompareToProps> = ({ stockName }: ICompareToProps) => {
+const CompareTo = () => {
+  const { stockName } = useStockState()
+
   const { mutate, data = [], isLoading } = getCompareTo()
 
   const onChangeCompareTo = (stocksToCompare: string[]) => {
-    mutate({
-      stockName,
-      stocksToCompare
-    })
+    if (stockName && stockName !== '') {
+      mutate({
+        stockName,
+        stocksToCompare
+      })
+    }
   }
 
   const choiceIconForItemCompare = (
     defaultItem: IStock,
     itemToCompare: IStock
   ) => {
-    const diffPrice = defaultItem.lastPrice - itemToCompare.lastPrice
+    const diffPrice = formatToUSD(
+      defaultItem.lastPrice - itemToCompare.lastPrice
+    )
 
     if (defaultItem.lastPrice > itemToCompare.lastPrice) {
       return (
@@ -49,7 +54,11 @@ const CompareTo: FC<ICompareToProps> = ({ stockName }: ICompareToProps) => {
       )
     }
 
-    return <SwapOutlined />
+    return (
+      <Styled.ComparePriceEqual>
+        <SwapOutlined /> <span>{diffPrice}</span>
+      </Styled.ComparePriceEqual>
+    )
   }
 
   return (
@@ -60,30 +69,26 @@ const CompareTo: FC<ICompareToProps> = ({ stockName }: ICompareToProps) => {
         mode="tags"
         onChange={onChangeCompareTo}
         tokenSeparators={[',']}
-        options={SELECT_SUGGESTIONS}
+        options={SELECT_SUGGESTIONS?.filter(
+          (option) => option.label !== stockName
+        )}
       />
 
       {isLoading ? (
         <Spin />
       ) : (
-        <>
-          {isEmpty(data.length) ? (
-            <Empty />
-          ) : (
-            <Styled.ListCompare>
-              {data.map((item: IStock, key: number) => (
-                <Card key={key}>
-                  <p>
-                    <span>{item.name}</span>
-                    <span>{item.lastPrice}</span>
-                    <span>{choiceIconForItemCompare(data[0], item)}</span>
-                    <span> {formatDate(item.pricedAt.toString())}</span>
-                  </p>
-                </Card>
-              ))}
-            </Styled.ListCompare>
-          )}
-        </>
+        <Styled.ListCompare>
+          {data.map((item: IStock, key: number) => (
+            <Card key={key}>
+              <Styled.CompareItem>
+                <span>{item.name}</span>
+                <span>{formatToUSD(item.lastPrice)}</span>
+                <span>{choiceIconForItemCompare(data[0], item)}</span>
+                <span> {formatDate(item.pricedAt.toString())}</span>
+              </Styled.CompareItem>
+            </Card>
+          ))}
+        </Styled.ListCompare>
       )}
     </Styled.StockSectionWrapper>
   )

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ToastContainer } from 'react-toastify'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle from './styles/global'
+import GlobalContext from './contexts'
 import theme from './styles/theme'
 
 const App = () => {
@@ -12,13 +13,15 @@ const App = () => {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <ToastContainer />
-          <Routes />
-        </ThemeProvider>
-      </QueryClientProvider>
+      <GlobalContext>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <ToastContainer />
+            <Routes />
+          </ThemeProvider>
+        </QueryClientProvider>
+      </GlobalContext>
     </>
   )
 }

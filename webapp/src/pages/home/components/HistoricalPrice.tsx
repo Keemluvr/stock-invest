@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Stock, StockConfig } from '@ant-design/plots'
 import { Card } from '@/components'
 import { getStockHistory } from '../service'
@@ -8,15 +8,11 @@ import { formatDate } from '@/helpers'
 import { isEmpty } from 'lodash'
 import dayjs, { Dayjs } from 'dayjs'
 import * as Styled from '../style'
+import { useStockState } from '@/contexts/stocks'
 
-export interface IHistoricalPriceProps {
-  stockName: string
-}
-
-const HistoricalPrice: FC<IHistoricalPriceProps> = ({
-  stockName
-}: IHistoricalPriceProps) => {
+const HistoricalPrice = () => {
   const { RangePicker } = DatePicker
+  const { stockName } = useStockState()
 
   const today = dayjs()
   const [to, setTo] = useState<Dayjs>(today)
@@ -25,16 +21,19 @@ const HistoricalPrice: FC<IHistoricalPriceProps> = ({
   const { mutate, data = [], isLoading } = getStockHistory()
 
   useEffect(() => {
-    mutate({ stockName, from: from.toDate(), to: to.toDate() })
+    if (stockName && stockName !== '') onChangeRangeHistory([from, to])
   }, [stockName])
 
-  const onChangeRangeHistory = ([startDate, endDate]: any) => {
+  const onChangeRangeHistory = ([
+    startDate = today,
+    endDate = today.subtract(15, 'days')
+  ]: [Dayjs, Dayjs]) => {
     setFrom(startDate)
     setTo(endDate)
     mutate({
       stockName,
-      from: dayjs(startDate).toDate(),
-      to: dayjs(startDate).toDate()
+      from: new Date(dayjs(startDate).toDate()),
+      to: new Date(dayjs(endDate).toDate())
     })
   }
 
@@ -57,7 +56,7 @@ const HistoricalPrice: FC<IHistoricalPriceProps> = ({
         <Spin />
       ) : (
         <>
-          {isEmpty(data.length) ? (
+          {isEmpty(data) ? (
             <Empty />
           ) : (
             <>
@@ -66,7 +65,9 @@ const HistoricalPrice: FC<IHistoricalPriceProps> = ({
                 disabledDate={disabledDate}
                 defaultPickerValue={[from, to]}
                 value={[from, to]}
-                onCalendarChange={onChangeRangeHistory}
+                onCalendarChange={(evt) =>
+                  onChangeRangeHistory(evt as [Dayjs, Dayjs])
+                }
                 disabled={isLoading}
               />
 

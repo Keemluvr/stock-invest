@@ -24,7 +24,8 @@ const theme = {
     },
     stockCompare: {
       arrowDown: '#ff4d4f',
-      arrowUp: '#52c41a'
+      arrowUp: '#52c41a',
+      equal: '#faad14'
     }
   },
   font: {

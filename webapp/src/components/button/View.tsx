@@ -1,4 +1,4 @@
-import React, { FC, InputHTMLAttributes } from 'react'
+import { FC, InputHTMLAttributes } from 'react'
 import * as Styled from './Styles'
 
 export interface ButtonProps extends InputHTMLAttributes<HTMLInputElement> {}

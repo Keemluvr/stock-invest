@@ -4,24 +4,36 @@ import { getStock } from './service'
 import { SUGGESTIONS } from '@/constants'
 import { Spin } from 'antd'
 import { ICardDefault } from '@/components/card/View'
-import { CompareTo, HistoricalPrice } from './components'
+import { CompareTo, EarningForecasts, HistoricalPrice } from './components'
+import { useStockState } from '@/contexts/stocks'
 import useDebounce from '@/hooks/useDebounce'
 import * as Styled from './style'
 
 const Home = () => {
   const [stock, setStock] = useState<string>('')
   const debouncedStock = useDebounce<string>(stock, 1500)
+  const { updateStockName } = useStockState()
 
   const { mutate, data, isLoading } = getStock()
 
   useEffect(() => {
-    if (stock && stock !== '') mutate({ stockName: debouncedStock })
+    if (stock && stock !== '') {
+      mutate({ stockName: debouncedStock })
+    }
   }, [debouncedStock])
 
   const searchStock = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const stockName = evt.target.value.trim()
     setStock(stockName)
+    updateStockName(stockName)
   }
+
+  const onClickSuggestion = (name: string) =>
+    searchStock({
+      target: {
+        value: name
+      }
+    } as unknown as React.ChangeEvent<HTMLInputElement>)
 
   return (
     <Styled.HomeWrapper>
@@ -32,7 +44,10 @@ const Home = () => {
           {SUGGESTIONS.map(
             (name) =>
               name !== stock && (
-                <Styled.Suggestion key={name} onClick={() => setStock(name)}>
+                <Styled.Suggestion
+                  key={name}
+                  onClick={() => onClickSuggestion(name)}
+                >
                   {name}
                 </Styled.Suggestion>
               )
@@ -50,8 +65,9 @@ const Home = () => {
                 <Styled.StockTitle>Current Price</Styled.StockTitle>
                 <Card default={data as ICardDefault} withBorder />
 
-                <HistoricalPrice stockName={stock} />
-                <CompareTo stockName={stock} />
+                <HistoricalPrice />
+                <CompareTo />
+                <EarningForecasts />
               </Styled.Content>
             )}
           </>

@@ -7,9 +7,9 @@ export const Card = styled.div<CardProps>`
   flex-direction: column;
   position: relative;
   width: ${(props) => (props.default ? '31rem' : 'auto')};
-  height: ${(props) => (props.default ? '10rem' : 'auto')};
+  height: auto;
   margin: 0 auto;
-  padding: 1em 2em;
+  padding: 1em 1.5em;
   border-radius: 0.75em;
   box-shadow: ${({ theme }) => theme.preDefined.cardBoxShadow};
   text-align: left;
@@ -23,10 +23,6 @@ export const Card = styled.div<CardProps>`
 
   @media ${({ theme }) => theme.device.laptop} {
     width: calc(100% - 4em);
-  }
-
-  @media ${({ theme }) => theme.device.mobileL} {
-    height: 15rem;
   }
 `
 
@@ -50,7 +46,7 @@ export const CardItem = styled.div`
   justify-content: space-between;
   padding: 0 15%;
 
-  @media ${({ theme }) => theme.device.mobileL} {
+  @media ${({ theme }) => theme.device.laptopL} {
     flex-direction: column;
     margin-bottom: 30px;
   }

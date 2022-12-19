@@ -1,10 +1,12 @@
 import {
   fetchCompareByName,
   fetchHistoryStockByName,
+  fetchProjectionGains,
   fetchStockByName
 } from '@/services/stock'
 import { useMutation } from 'react-query'
 import {
+  formatEarningStockResponse,
   formatHistoryStockResponse,
   formatStockResponse
 } from './helpers/format'
@@ -50,7 +52,25 @@ interface IGetCompareToMutateParams {
  * Bring the last change of the main action and all the actions sent for comparison.
  */
 export const getCompareTo = () =>
-  useMutation({
-    mutationFn: async (params: IGetCompareToMutateParams) =>
+  useMutation(
+    async (params: IGetCompareToMutateParams) =>
       await fetchCompareByName(params.stockName, params.stocksToCompare)
-  })
+  )
+
+interface IGetEarningForecasts {
+  stockName: string
+  purchasedAt: Date
+  purchasedAmount: number
+}
+
+export const getEarningForecasts = () => {
+  const { data, ...props } = useMutation(
+    async (params: IGetEarningForecasts) =>
+      await fetchProjectionGains(
+        params.stockName,
+        params.purchasedAt,
+        params.purchasedAmount
+      )
+  )
+  return { data: formatEarningStockResponse(data), ...props }
+}

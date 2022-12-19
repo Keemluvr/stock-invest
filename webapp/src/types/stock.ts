@@ -21,3 +21,12 @@ export type StockHistory = {
 export type StockCompare = {
   lastPrices: Stock[]
 }
+
+export type StockGains = {
+  name: string
+  lastPrice: number
+  priceAtDate: string
+  purchasedAmount: number
+  purchasedAt: string
+  capitalGains: number
+}

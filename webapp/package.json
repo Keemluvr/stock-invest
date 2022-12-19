@@ -5,7 +5,6 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
     "eject": "craco eject",
     "prepare": "cd .. && husky install webapp/.husky",
     "lint": "eslint --config .eslintrc --fix",

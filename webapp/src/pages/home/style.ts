@@ -64,6 +64,7 @@ export const Suggestion = styled.button`
 `
 export const ContentWrapper = styled.div`
   margin: 40px 200px;
+  padding-bottom: 50px;
 
   @media ${({ theme }) => theme.device.tablet} {
     margin: 20px 12%;
@@ -123,6 +124,34 @@ export const StockSectionWrapper = styled.div`
     min-width: 400px;
     margin: 0 auto 30px auto;
   }
+
+  .ant-form {
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  @media ${({ theme }) => theme.device.laptop} {
+    .ant-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .ant-form-item {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  @media ${({ theme }) => theme.device.tablet} {
+    .ant-form-item-label,
+    .ant-form-item-control-input-content {
+      display: flex;
+      justify-content: center;
+    }
+  }
 `
 
 export const StockTitle = styled.h2`
@@ -151,4 +180,34 @@ export const ComparePriceUp = styled.div`
 
 export const ComparePriceDown = styled.div`
   color: ${({ theme }) => theme.color.stockCompare.arrowDown};
+`
+
+export const ComparePriceEqual = styled.div`
+  color: ${({ theme }) => theme.color.stockCompare.equal};
+`
+
+export const CompareItem = styled.div`
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr 130px;
+
+  @media ${({ theme }) => theme.device.laptopL} {
+    grid-template-columns: 150px 1fr 1fr 130px;
+  }
+
+  @media ${({ theme }) => theme.device.laptop} {
+    grid-template-columns: 1fr 1fr;
+
+    span:nth-child(n + 3) {
+      margin-top: 8px;
+    }
+  }
+
+  @media ${({ theme }) => theme.device.mobileL} {
+    grid-template-columns: 1fr;
+    text-align: center;
+
+    & > span + span {
+      margin-top: 8px;
+    }
+  }
 `
